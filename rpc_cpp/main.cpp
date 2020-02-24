@@ -5,7 +5,8 @@
 /*This file is the main and only agent src file. It launches a thread to emit a beacon and execute commands from server*/
 
 void getLocalOS(GET_LOCAL_OS *ds){
-
+    sprintf(ds->OS,"Linux");
+    ds->valid = '1';
 }
 
 void getLocalTime(GET_LOCAL_TIME *ds){
@@ -86,11 +87,12 @@ void * cmdAgent(void *beacon){
         if(cmd->substr(0,12).compare("GetLocalTime") == 0){
             GET_LOCAL_TIME *ds = (GET_LOCAL_TIME *)malloc(sizeof(GET_LOCAL_TIME));
             getLocalTime(ds);
-            printf("%d %c\n",ds->time,ds->valid);
             sprintf(packet, "%d %c\n",ds->time,ds->valid);
         }
         if(cmd->substr(0,10).compare("GetLocalOS") == 0){
-
+            GET_LOCAL_OS *ds = (GET_LOCAL_OS *)malloc(sizeof(GET_LOCAL_OS));
+            getLocalOS(ds);
+            sprintf(packet, "%s %c\n",ds->OS,ds->valid);
         }
         cout << "Sending response..." << endl;
         write (sock, packet, strlen(packet));

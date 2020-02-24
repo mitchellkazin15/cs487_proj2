@@ -71,9 +71,9 @@ public class GetLocalTime {
 
     public void printResponse(){
         if(this.valid.getValue() == '1'){
-            Date date = new Date(this.time.getValue());
+            Date date = new Date((long)this.time.getValue()*1000);
             SimpleDateFormat jdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z");
-            System.out.println(jdf.format(date));
+            System.out.println("RPC Response: " + jdf.format(date));
         }
         else{
             System.out.println("Invalid Response");

@@ -72,8 +72,9 @@ public class RPCManager {
                 if(agentNum < agents.size()){
                     Agent a = agents.get(agentNum);
                     if(a.alive){
-                        GetLocalOS os = new GetLocalOS();
-                        os.execute(a.agentIP.toString(), a.cmdPort);
+                        GetLocalOS os = new GetLocalOS(a.socket);
+                        os.execute();
+                        os.printResponse();
                     }
                     else{
                         System.out.println("Agent is not connected");
