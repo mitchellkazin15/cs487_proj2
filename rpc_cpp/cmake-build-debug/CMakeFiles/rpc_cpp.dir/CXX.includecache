@@ -29,6 +29,8 @@ netinet/in.h
 -
 arpa/inet.h
 -
+sys/utsname.h
+-
 cstdlib
 -
 iostream
